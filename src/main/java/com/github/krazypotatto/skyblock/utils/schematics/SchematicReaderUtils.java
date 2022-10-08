@@ -24,7 +24,6 @@ public class SchematicReaderUtils {
 
             parts = gson.fromJson(reader, new TypeToken<List<SchematicPart>>() {
             }.getType());
-            parts.forEach(System.out::println);
 
             reader.close();
         } catch (IOException ex){
