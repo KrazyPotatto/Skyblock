@@ -5,8 +5,7 @@ import com.github.krazypotatto.skyblock.Skyblock;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class Island extends AbstractSerializable<Island>{
 
@@ -99,6 +98,29 @@ public class Island extends AbstractSerializable<Island>{
 
     public void setInvites(List<UUID> invites) {
         this.invites = invites;
+    }
+
+    @Override
+    public String toString() {
+        return "Island{" +
+                "spawnX=" + spawnX +
+                ", spawnY=" + spawnY +
+                ", spawnZ=" + spawnZ +
+                ", owner=" + owner +
+                ", islandID=" + islandID +
+                ", members=" + members +
+                ", invites=" + invites +
+                '}';
+    }
+
+    public static ArrayList<Island> loadIslands(Skyblock pl){
+        File file = new File(Paths.get(pl.getDataFolder().getPath(), "islands").toUri());
+        if(!file.exists()) return new ArrayList<>();
+        ArrayList<Island> list = new ArrayList<>();
+        for(File f: Objects.requireNonNull(file.listFiles())){
+            list.add(new Island(f.getName()));
+        }
+        return list;
     }
 
 }

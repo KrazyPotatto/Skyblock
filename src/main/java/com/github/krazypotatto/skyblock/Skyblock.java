@@ -15,7 +15,7 @@ public final class Skyblock extends JavaPlugin {
 
     private static Skyblock instance;
 
-    public ArrayList<Island> islands = new ArrayList<>();
+    public ArrayList<Island> islands;
     public MessagesConfigHandler messages = new MessagesConfigHandler(this);
     public SchematicReaderUtils schematic;
 
@@ -26,6 +26,7 @@ public final class Skyblock extends JavaPlugin {
         saveDefaultConfig();
         saveResource("schem.json", false);
         schematic = new SchematicReaderUtils("schem.json", this);
+        islands = Island.loadIslands(this);
     }
 
     @Override
