@@ -1,6 +1,8 @@
 package com.github.krazypotatto.skyblock.commands;
 
 import com.github.krazypotatto.skyblock.Skyblock;
+import com.github.krazypotatto.skyblock.commands.island.CreateCommand;
+import com.github.krazypotatto.skyblock.commands.island.LeaveCommand;
 import com.github.krazypotatto.skyblock.utils.MessagesConfigHandler;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -8,12 +10,17 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.*;
+
 public class IslandCommand implements CommandExecutor {
 
     private Skyblock pl;
+    private final List<ICommandExecutor> commands = new ArrayList<>();
 
     public IslandCommand(Skyblock pl){
         this.pl = pl;
+        commands.add(new CreateCommand());
+        commands.add(new LeaveCommand());
     }
 
     @Override
@@ -23,8 +30,25 @@ public class IslandCommand implements CommandExecutor {
             return true;
         }
         Player p = (Player) sender;
-        pl.schematic.placeSchematic(p.getLocation().add(5, 10, 5));
+        if(args.length < 1){
+            pl.messages.sendLocatedMessage(p, "commands.not-found", MessagesConfigHandler.PrefixType.ERROR);
+        } else {
+            dispatchAction(p, args, args[0]);
+        }
         return true;
+    }
+
+    public void dispatchAction(@NotNull Player p, @NotNull String[] args, @NotNull String command){
+        Optional<ICommandExecutor> found = commands.stream().filter(c -> c.getCommand().equalsIgnoreCase(command)).findFirst();
+        if(found.isPresent()){
+            if(p.hasPermission(found.get().getPermission())) {
+                found.get().executeCommand(p, Arrays.copyOfRange(args, 1, args.length), pl);
+            } else {
+                pl.messages.sendLocatedMessage(p, "commands.no-permission", MessagesConfigHandler.PrefixType.ERROR);
+            }
+        } else {
+            pl.messages.sendLocatedMessage(p, "commands.not-found", MessagesConfigHandler.PrefixType.ERROR);
+        }
     }
 
 }

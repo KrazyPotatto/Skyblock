@@ -32,7 +32,13 @@ public class SchematicReaderUtils {
         }
     }
 
-    public void placeSchematic(Location loc){
+    /***
+     * Place the schematic and returns to spawn Location
+     * @param loc
+     * @return
+     */
+    public Location placeSchematic(Location loc){
+        Location spawn = new Location(loc.getWorld(), 0, 0, 0);
         for(SchematicPart part: parts){
             if(part.type.equalsIgnoreCase("block")){
                 loc.getWorld().getBlockAt(loc.getBlockX() + part.x,
@@ -43,8 +49,13 @@ public class SchematicReaderUtils {
                 loc.getWorld().generateTree(new Location(loc.getWorld(), loc.getBlockX() + part.x,
                         loc.getBlockY() + part.y, loc.getBlockZ() + part.z), TreeType.valueOf(part.tree.toUpperCase()));
             }
+            if(part.type.equalsIgnoreCase("spawn")){
+                spawn.setX(part.x + loc.getBlockX());
+                spawn.setY(part.y + loc.getBlockY());
+                spawn.setZ(part.z + loc.getBlockZ());
+            }
         }
-
+        return spawn;
     }
 
 }

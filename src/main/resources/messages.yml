@@ -6,6 +6,8 @@ success-prefix: "&2Success &7> &a"
 
 commands:
   not-console: "Only a player can execute this command."
+  not-found: "The command you entered was not found."
+  no-permission: "You don't have the necessary permissions to execute this command."
   island:
     created:
       success: "Island created successfully!"

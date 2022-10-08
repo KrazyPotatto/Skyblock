@@ -6,7 +6,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 
 import java.io.File;
 
@@ -45,10 +44,6 @@ public class MessagesConfigHandler {
                 break;
         }
         return prefix;
-    }
-
-    public void sendLocatedMessage(Player p, String location, PrefixType prefix){
-        p.sendMessage(Component.text(ChatColor.translateAlternateColorCodes('&', generatePrefix(prefix) + config.getString(location))));
     }
 
     public void sendLocatedMessage(CommandSender p, String location, PrefixType prefix){
