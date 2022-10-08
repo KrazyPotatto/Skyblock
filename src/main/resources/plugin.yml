@@ -1,0 +1,9 @@
+name: Skyblock
+version: '${project.version}'
+main: com.github.krazypotatto.skyblock.Skyblock
+api-version: 1.19
+prefix: SB
+load: STARTUP
+depend: [ MGCore ]
+authors: [ KrazyPotatto ]
+description: Skyblock Plugin
