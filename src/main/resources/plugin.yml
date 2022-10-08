@@ -7,3 +7,6 @@ load: STARTUP
 depend: [ MGCore ]
 authors: [ KrazyPotatto ]
 description: Skyblock Plugin
+commands:
+  is:
+    description: Main Island Command

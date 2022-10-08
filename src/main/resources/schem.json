@@ -1,0 +1,204 @@
+[
+  {
+    "type": "block",
+    "x": 1,
+    "y": 0,
+    "z": -1,
+    "block": "grass_block"
+  },
+  {
+    "type": "block",
+    "x": 1,
+    "y": 0,
+    "z": 0,
+    "block": "grass_block"
+  },
+  {
+    "type": "block",
+    "x": 1,
+    "y": 0,
+    "z": 1,
+    "block": "grass_block"
+  },
+  {
+    "type": "block",
+    "x": 0,
+    "y": 0,
+    "z": -1,
+    "block": "grass_block"
+  },
+  {
+    "type": "block",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "block": "dirt"
+  },
+  {
+    "type": "block",
+    "x": 0,
+    "y": 0,
+    "z": 1,
+    "block": "grass_block"
+  },
+  {
+    "type": "block",
+    "x": -1,
+    "y": 0,
+    "z": -1,
+    "block": "grass_block"
+  },
+  {
+    "type": "block",
+    "x": -1,
+    "y": 0,
+    "z": 0,
+    "block": "grass_block"
+  },
+  {
+    "type": "block",
+    "x": -1,
+    "y": 0,
+    "z": 1,
+    "block": "grass_block"
+  },
+  {
+    "type": "block",
+    "x": 1,
+    "y": -1,
+    "z": -1,
+    "block": "dirt"
+  },
+  {
+    "type": "block",
+    "x": 1,
+    "y": -1,
+    "z": 0,
+    "block": "dirt"
+  },
+  {
+    "type": "block",
+    "x": 1,
+    "y": -1,
+    "z": 1,
+    "block": "dirt"
+  },
+  {
+    "type": "block",
+    "x": 0,
+    "y": -1,
+    "z": -1,
+    "block": "dirt"
+  },
+  {
+    "type": "block",
+    "x": 0,
+    "y": -1,
+    "z": 0,
+    "block": "dirt"
+  },
+  {
+    "type": "block",
+    "x": 0,
+    "y": -1,
+    "z": 1,
+    "block": "dirt"
+  },
+  {
+    "type": "block",
+    "x": -1,
+    "y": -1,
+    "z": -1,
+    "block": "dirt"
+  },
+  {
+    "type": "block",
+    "x": -1,
+    "y": -1,
+    "z": 0,
+    "block": "dirt"
+  },
+  {
+    "type": "block",
+    "x": -1,
+    "y": -1,
+    "z": 1,
+    "block": "dirt"
+  },
+  {
+    "type": "block",
+    "x": 1,
+    "y": -2,
+    "z": -1,
+    "block": "dirt"
+  },
+  {
+    "type": "block",
+    "x": 1,
+    "y": -2,
+    "z": 0,
+    "block": "dirt"
+  },
+  {
+    "type": "block",
+    "x": 1,
+    "y": -2,
+    "z": 1,
+    "block": "dirt"
+  },
+  {
+    "type": "block",
+    "x": 0,
+    "y": -2,
+    "z": -1,
+    "block": "dirt"
+  },
+  {
+    "type": "block",
+    "x": 0,
+    "y": -2,
+    "z": 0,
+    "block": "bedrock"
+  },
+  {
+    "type": "block",
+    "x": 0,
+    "y": -2,
+    "z": 1,
+    "block": "dirt"
+  },
+  {
+    "type": "block",
+    "x": -1,
+    "y": -2,
+    "z": -1,
+    "block": "dirt"
+  },
+  {
+    "type": "block",
+    "x": -1,
+    "y": -2,
+    "z": 0,
+    "block": "dirt"
+  },
+  {
+    "type": "block",
+    "x": -1,
+    "y": -2,
+    "z": 1,
+    "block": "dirt"
+  },
+  {
+    "type": "tree",
+    "tree": "tree",
+    "x": 0,
+    "y": 1,
+    "z": 0
+  },
+  {
+    "type": "spawn",
+    "x": 1,
+    "y": 1,
+    "z": 0
+  }
+]

@@ -1,0 +1,12 @@
+# Prefixes
+prefix: "&6Skyblock &7>> &e"
+# The next prefixes will be appended on the one above
+error-prefix: "&4Error &7> &c"
+success-prefix: "&2Success &7> &a"
+
+commands:
+  not-console: "Only a player can execute this command."
+  island:
+    created:
+      success: "Island created successfully!"
+      error: "An error occurred."
