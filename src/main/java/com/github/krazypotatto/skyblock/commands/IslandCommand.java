@@ -2,6 +2,7 @@ package com.github.krazypotatto.skyblock.commands;
 
 import com.github.krazypotatto.skyblock.Skyblock;
 import com.github.krazypotatto.skyblock.commands.island.CreateCommand;
+import com.github.krazypotatto.skyblock.commands.island.HomeCommand;
 import com.github.krazypotatto.skyblock.commands.island.LeaveCommand;
 import com.github.krazypotatto.skyblock.utils.MessagesConfigHandler;
 import org.bukkit.command.Command;
@@ -14,13 +15,14 @@ import java.util.*;
 
 public class IslandCommand implements CommandExecutor {
 
-    private Skyblock pl;
+    private final Skyblock pl;
     private final List<ICommandExecutor> commands = new ArrayList<>();
 
     public IslandCommand(Skyblock pl){
         this.pl = pl;
         commands.add(new CreateCommand());
         commands.add(new LeaveCommand());
+        commands.add(new HomeCommand());
     }
 
     @Override
@@ -50,5 +52,4 @@ public class IslandCommand implements CommandExecutor {
             pl.messages.sendLocatedMessage(p, "commands.not-found", MessagesConfigHandler.PrefixType.ERROR);
         }
     }
-
 }

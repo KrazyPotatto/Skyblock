@@ -28,6 +28,7 @@ public class MessagesConfigHandler {
         }
 
         config = YamlConfiguration.loadConfiguration(configFile);
+        pl.getLogger().info("Loaded messages.");
     }
 
     private String generatePrefix(PrefixType type){

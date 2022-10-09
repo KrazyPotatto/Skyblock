@@ -8,25 +8,21 @@ import com.github.krazypotatto.skyblock.worldgen.VoidChunkGenerator;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public final class Skyblock extends JavaPlugin {
 
-    private static Skyblock instance;
-
     public ArrayList<Island> islands;
-    public MessagesConfigHandler messages = new MessagesConfigHandler(this);
+    public MessagesConfigHandler messages;
     public SchematicReaderUtils schematic;
 
     @Override
     public void onEnable() {
-        instance = this;
+        loadFiles();
         Objects.requireNonNull(getCommand("is")).setExecutor(new IslandCommand(this));
-        saveDefaultConfig();
-        saveResource("schem.json", false);
-        schematic = new SchematicReaderUtils("schem.json", this);
-        islands = Island.loadIslands(this);
     }
 
     @Override
@@ -39,6 +35,22 @@ public final class Skyblock extends JavaPlugin {
         return new VoidChunkGenerator();
     }
 
-    public static Skyblock getInstance(){ return instance; }
+    private void loadFiles(){
+        getLogger().info("Starting to load configurations files...");
+        // Save the default config
+        saveDefaultConfig();
+        getLogger().info("Saved default config!");
+        // Save the default schematic if it doesn't exist
+        if(!new File(Paths.get(getDataFolder().getPath(), "schem.json").toUri()).exists())
+            saveResource("schem.json", false);
+        // Load the schematic to be used
+        schematic = new SchematicReaderUtils("schem.json", this);
+        getLogger().info("Loaded the schem.json file.");
+        // Load all saved Islands
+        islands = Island.loadIslands(this);
+        getLogger().info("Loaded " + islands.size() + " islands from files.");
+        messages = new MessagesConfigHandler(this);
+        getLogger().info("All config files were loaded successfully!");
+    }
 
 }

@@ -9,6 +9,8 @@ commands:
   not-found: "The command you entered was not found."
   no-permission: "You don't have the necessary permissions to execute this command."
   island:
+    no-island: "You are not part of an island. You can't use this command."
     created:
       success: "Island created successfully!"
       error: "An error occurred."
+    home: "You have been teleported to your island's spawn point"
