@@ -3,15 +3,10 @@ package com.github.krazypotatto.skyblock.commands.island;
 import com.github.krazypotatto.skyblock.Skyblock;
 import com.github.krazypotatto.skyblock.commands.ICommandExecutor;
 import com.github.krazypotatto.skyblock.utils.MessagesConfigHandler;
-import com.github.krazypotatto.skyblock.utils.serializables.Island;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
+import com.github.krazypotatto.skyblock.utils.queue.SyncTaskManager;
+import com.github.krazypotatto.skyblock.utils.islands.IslandGenerationRunnable;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.UUID;
 
 public class CreateCommand implements ICommandExecutor {
 
@@ -27,16 +22,12 @@ public class CreateCommand implements ICommandExecutor {
 
     @Override
     public void executeCommand(@NotNull Player p, @NotNull String[] args, @NotNull Skyblock pl) {
-        Location spawn = pl.schematic.placeSchematic(p.getLocation().add(10 , 5, 10));
-        Island is = new Island(spawn.getBlockX(), spawn.getBlockY(), spawn.getBlockZ(), p.getUniqueId(), UUID.randomUUID(), new ArrayList<>(), new ArrayList<>(), Bukkit.getWorlds().get(0).getUID());
-        try {
-            is.saveData();
-        } catch (IOException e) {
-            pl.messages.sendLocatedMessage(p, "commands.island.created.error", MessagesConfigHandler.PrefixType.ERROR);
-            throw new RuntimeException(e);
+        if(pl.islandManager.getIsland(p).isPresent()
+        || SyncTaskManager.getInstance().getTasks().stream().anyMatch(t -> t instanceof IslandGenerationRunnable && ((IslandGenerationRunnable) t).p.getUniqueId() == p.getUniqueId())) {
+            pl.messages.sendLocatedMessage(p, "commands.island.in-island", MessagesConfigHandler.PrefixType.ERROR);
+        }else{
+            pl.messages.sendLocatedMessage(p, "commands.island.created.queued", MessagesConfigHandler.PrefixType.NONE);
+            SyncTaskManager.getInstance().addTask(new IslandGenerationRunnable(pl, p));
         }
-        pl.islands.add(is);
-        pl.messages.sendLocatedMessage(p, "commands.island.created.success", MessagesConfigHandler.PrefixType.SUCCESS);
-        p.teleport(is.getSpawn());
     }
 }

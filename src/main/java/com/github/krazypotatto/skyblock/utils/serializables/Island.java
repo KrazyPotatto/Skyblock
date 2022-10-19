@@ -12,7 +12,7 @@ import java.util.*;
 
 public class Island extends AbstractSerializable<Island>{
 
-    private long spawnX, spawnY, spawnZ;
+    private long spawnX, spawnY, spawnZ, centerX, centerZ;
     private UUID owner, islandID, worldUUID;
     private List<UUID> members, invites;
 
@@ -25,11 +25,13 @@ public class Island extends AbstractSerializable<Island>{
         }
     }
 
-    public Island(long spawnX, long spawnY, long spawnZ, UUID owner, UUID islandID, List<UUID> members, List<UUID> invites, UUID worldUUID) {
+    public Island(long spawnX, long spawnY, long spawnZ, long centerX, long centerZ, UUID owner, UUID islandID, List<UUID> members, List<UUID> invites, UUID worldUUID) {
         super(Island.class, new File(Paths.get(JavaPlugin.getPlugin(Skyblock.class).getDataFolder().getPath(), "islands", islandID.toString() + ".json").toUri()));
         this.spawnX = spawnX;
         this.spawnY = spawnY;
         this.spawnZ = spawnZ;
+        this.centerX = centerX;
+        this.centerZ = centerZ;
         this.owner = owner;
         this.islandID = islandID;
         this.members = members;
@@ -44,6 +46,8 @@ public class Island extends AbstractSerializable<Island>{
         this.spawnX = readClass.spawnX;
         this.spawnY = readClass.spawnY;
         this.spawnZ = readClass.spawnZ;
+        this.centerX = readClass.centerX;
+        this.centerZ = readClass.centerZ;
         this.members = readClass.members;
         this.invites = readClass.invites;
         this.worldUUID = readClass.worldUUID;
@@ -71,6 +75,14 @@ public class Island extends AbstractSerializable<Island>{
 
     public void setSpawnZ(long spawnZ) {
         this.spawnZ = spawnZ;
+    }
+
+    public long getCenterX() {
+        return centerX;
+    }
+
+    public long getCenterZ() {
+        return centerZ;
     }
 
     public UUID getOwner() {

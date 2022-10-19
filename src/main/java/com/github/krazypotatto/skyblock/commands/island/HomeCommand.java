@@ -23,10 +23,13 @@ public class HomeCommand implements ICommandExecutor {
 
     @Override
     public void executeCommand(@NotNull Player p, @NotNull String[] args, @NotNull Skyblock pl) {
-        Optional<Island> is = pl.islands.stream().filter(i -> i.getOwner().equals(p.getUniqueId())).findFirst();
-        is.ifPresent(island -> {
+        Optional<Island> is = pl.islandManager.getIsland(p);
+        if(is.isPresent()){
+            Island island = is.get();
             p.teleport(island.getSpawn());
             pl.messages.sendLocatedMessage(p, "commands.island.home", MessagesConfigHandler.PrefixType.SUCCESS);
-        });
+        } else {
+            pl.messages.sendLocatedMessage(p, "commands.island.no-island", MessagesConfigHandler.PrefixType.ERROR);
+        }
     }
 }

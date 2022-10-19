@@ -2,6 +2,7 @@ package com.github.krazypotatto.skyblock;
 
 import com.github.krazypotatto.skyblock.commands.IslandCommand;
 import com.github.krazypotatto.skyblock.utils.MessagesConfigHandler;
+import com.github.krazypotatto.skyblock.utils.islands.IslandManager;
 import com.github.krazypotatto.skyblock.utils.schematics.SchematicReaderUtils;
 import com.github.krazypotatto.skyblock.utils.serializables.Island;
 import com.github.krazypotatto.skyblock.worldgen.VoidChunkGenerator;
@@ -10,12 +11,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public final class Skyblock extends JavaPlugin {
 
-    public ArrayList<Island> islands;
+    public IslandManager islandManager;
     public MessagesConfigHandler messages;
     public SchematicReaderUtils schematic;
 
@@ -47,8 +47,8 @@ public final class Skyblock extends JavaPlugin {
         schematic = new SchematicReaderUtils("schem.json", this);
         getLogger().info("Loaded the schem.json file.");
         // Load all saved Islands
-        islands = Island.loadIslands(this);
-        getLogger().info("Loaded " + islands.size() + " islands from files.");
+        islandManager = new IslandManager(Island.loadIslands(this));
+        getLogger().info("Loaded " + islandManager.count() + " islands from files.");
         messages = new MessagesConfigHandler(this);
         getLogger().info("All config files were loaded successfully!");
     }

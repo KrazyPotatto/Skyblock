@@ -1,2 +1,11 @@
 # CONFIG VERSION. DO NOT TOUCH!
 config-version: '1.0'
+islands:
+  # Radius to the border of the next island.
+  # The player can build in a (spacing * 2) x (spacing * 2)
+  # Eg.: If spacing = 100, then the player will have a 200x200 chunk to build (their island being in the center)
+  spacing: 100
+  last:
+    x: 0
+    y: 70
+    z: 0

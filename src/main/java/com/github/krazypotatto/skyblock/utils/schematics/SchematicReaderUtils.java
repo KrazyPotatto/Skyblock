@@ -36,7 +36,7 @@ public class SchematicReaderUtils {
      * @param loc
      * @return
      */
-    public Location placeSchematic(Location loc){
+    public Location placeSchematic(Location loc, Skyblock pl){
         Location spawn = new Location(loc.getWorld(), 0, 0, 0);
         for(SchematicPart part: parts){
             if(part.type.equalsIgnoreCase("block")){
@@ -54,6 +54,10 @@ public class SchematicReaderUtils {
                 spawn.setZ(part.z + loc.getBlockZ());
             }
         }
+        pl.getConfig().set("islands.last.x", loc.getBlockX());
+        pl.getConfig().set("islands.last.y", loc.getBlockY());
+        pl.getConfig().set("islands.last.z", loc.getBlockZ());
+        pl.saveConfig();
         return spawn;
     }
 
