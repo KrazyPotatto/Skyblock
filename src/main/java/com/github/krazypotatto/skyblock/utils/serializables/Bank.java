@@ -13,8 +13,8 @@ import java.util.UUID;
 
 public class Bank extends AbstractSerializable<Bank>{
 
-    private float totalCirculating;
-    private float totalAllocated;
+    private double totalCirculating;
+    private double totalAllocated;
     private List<BankAccount> accounts;
 
     public Bank(Skyblock pl) {
@@ -40,19 +40,19 @@ public class Bank extends AbstractSerializable<Bank>{
         this.accounts = readClass.accounts;
     }
 
-    public float getTotalCirculating() {
+    public double getTotalCirculating() {
         return totalCirculating;
     }
 
-    public void setTotalCirculating(int totalCirculating) {
+    public void setTotalCirculating(double totalCirculating) {
         this.totalCirculating = totalCirculating;
     }
 
-    public float getTotalAllocated() {
+    public double getTotalAllocated() {
         return totalAllocated;
     }
 
-    public void setTotalAllocated(int totalAllocated) {
+    public void setTotalAllocated(double totalAllocated) {
         this.totalAllocated = totalAllocated;
     }
 
@@ -68,7 +68,7 @@ public class Bank extends AbstractSerializable<Bank>{
         return accounts.stream().filter(a -> a.getOwner().equals(uuid)).findFirst();
     }
 
-    public void addCirculating(float toAdd){
+    public void addCirculating(double toAdd){
         this.totalCirculating += toAdd;
         try {
             this.saveData();
@@ -77,13 +77,49 @@ public class Bank extends AbstractSerializable<Bank>{
         }
     }
 
-    public void addAllocated(float toAdd){
+    public void addAllocated(double toAdd){
         this.totalAllocated += toAdd;
         try {
             this.saveData();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public boolean withdraw(UUID account, double amount){
+        Optional<BankAccount> acc = getAccount(account);
+        if(acc.isPresent()){
+            BankAccount ba = acc.get();
+            if(ba.getBalance() >= amount){
+                ba.incrementBalance(-amount);
+                addAllocated(-amount);
+                return true;
+            }else {
+                return false;
+            }
+        }else {
+            return false;
+        }
+    }
+
+    public boolean deposit(UUID account, double amount){
+        Optional<BankAccount> acc = getAccount(account);
+        if(acc.isPresent()){
+            BankAccount ba = acc.get();
+            if(getTotalCirculating() - getTotalAllocated() >= amount){
+                ba.incrementBalance(amount);
+                addAllocated(amount);
+                return true;
+            }else {
+                return false;
+            }
+        }else {
+            return false;
+        }
+    }
+
+    public double getBalance(UUID account){
+        return getAccount(account).map(BankAccount::getBalance).orElse(-1.0);
     }
 
 }

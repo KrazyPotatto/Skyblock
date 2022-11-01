@@ -1,5 +1,6 @@
 package com.github.krazypotatto.skyblock;
 
+import com.github.krazypotatto.skyblock.api.impl.VaultEconomyConnector;
 import com.github.krazypotatto.skyblock.commands.BalanceCommand;
 import com.github.krazypotatto.skyblock.commands.IslandCommand;
 import com.github.krazypotatto.skyblock.utils.MessagesConfigHandler;
@@ -8,7 +9,9 @@ import com.github.krazypotatto.skyblock.utils.schematics.SchematicReaderUtils;
 import com.github.krazypotatto.skyblock.utils.serializables.Bank;
 import com.github.krazypotatto.skyblock.utils.serializables.Island;
 import com.github.krazypotatto.skyblock.worldgen.VoidChunkGenerator;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -28,6 +31,7 @@ public final class Skyblock extends JavaPlugin {
     @Override
     public void onEnable() {
         loadFiles();
+        registerEconomy();
         Objects.requireNonNull(getCommand("is")).setExecutor(new IslandCommand(this));
         Objects.requireNonNull(getCommand("bal")).setExecutor(new BalanceCommand(this));
     }
@@ -71,6 +75,15 @@ public final class Skyblock extends JavaPlugin {
         }
         messages = new MessagesConfigHandler(this);
         getLogger().info("All config files were loaded successfully!");
+    }
+
+    private void registerEconomy(){
+        if(getServer().getPluginManager().isPluginEnabled("Vault")) {
+            getServer().getServicesManager().register(Economy.class, new VaultEconomyConnector(this), this, ServicePriority.Highest);
+            getLogger().info("Vault connecter has been registered");
+        }else {
+            getLogger().info("Vault was not detected. Not registering.");
+        }
     }
 
 }

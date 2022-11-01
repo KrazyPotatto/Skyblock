@@ -28,6 +28,10 @@ public class IslandManager {
         return getIslandFromPlayer(p.getUniqueId());
     }
 
+    public Optional<UUID> getIslandUUID(OfflinePlayer p){
+        return getIslandFromPlayer(p.getUniqueId()).map(Island::getIslandID);
+    }
+
     public void addIsland(Island is){
         islands.add(is);
     }

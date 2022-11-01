@@ -67,6 +67,10 @@
             <name>My Private Maven Repository</name>
             <url>https://repo.kpotatto.tk/repository/releases</url>
         </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -80,6 +84,12 @@
             <groupId>me.kpotatto.mgcore</groupId>
             <artifactId>MGCore</artifactId>
             <version>1.0-RC2-3</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.MilkBowl</groupId>
+            <artifactId>VaultAPI</artifactId>
+            <version>1.7</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

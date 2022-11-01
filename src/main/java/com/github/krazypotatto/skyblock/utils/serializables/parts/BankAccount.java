@@ -5,7 +5,7 @@ import java.util.UUID;
 public class BankAccount {
 
     private UUID owner;
-    private float balance;
+    private double balance;
 
     public BankAccount(UUID owner, float balance) {
         this.owner = owner;
@@ -20,15 +20,15 @@ public class BankAccount {
         this.owner = owner;
     }
 
-    public float getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(float newBalance) {
+    public void setBalance(double newBalance) {
         this.balance = newBalance;
     }
 
-    public void incrementBalance(float toAdd) {
+    public void incrementBalance(double toAdd) {
         this.balance += toAdd;
     }
 
