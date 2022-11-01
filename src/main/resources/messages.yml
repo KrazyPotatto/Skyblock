@@ -16,3 +16,8 @@ commands:
       success: "Island created successfully!"
       error: "An error occurred."
     home: "You have been teleported to your island's spawn point"
+  balance:
+    bal:
+      show: "&aYour team's balance is &e%.2f&a$"
+      other: "&e%s&a's team has a balance of &e%.2f&a$"
+    no-account: "This player does not have an account."

@@ -4,6 +4,7 @@ import com.github.krazypotatto.skyblock.Skyblock;
 import com.github.krazypotatto.skyblock.utils.MessagesConfigHandler;
 import com.github.krazypotatto.skyblock.utils.queue.SyncTaskManager;
 import com.github.krazypotatto.skyblock.utils.serializables.Island;
+import com.github.krazypotatto.skyblock.utils.serializables.parts.BankAccount;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -37,6 +38,9 @@ public class IslandGenerationRunnable extends BukkitRunnable {
             throw new RuntimeException(e);
         }
         pl.islandManager.addIsland(is);
+        pl.bank.getAccounts().add(new BankAccount(is.getIslandID(), 250));
+        pl.bank.addCirculating(5000);
+        pl.bank.addAllocated(250);
         pl.messages.sendLocatedMessage(p, "commands.island.created.success", MessagesConfigHandler.PrefixType.SUCCESS);
         p.teleport(is.getSpawn());
 

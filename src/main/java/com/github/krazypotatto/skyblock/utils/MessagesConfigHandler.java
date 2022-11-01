@@ -50,5 +50,8 @@ public class MessagesConfigHandler {
     public void sendLocatedMessage(CommandSender p, String location, PrefixType prefix){
         p.sendMessage(Component.text(ChatColor.translateAlternateColorCodes('&', generatePrefix(prefix) + config.getString(location))));
     }
+    public void sendLocatedMessage(CommandSender p, String location, PrefixType prefix, Object... args){
+        p.sendMessage(Component.text(ChatColor.translateAlternateColorCodes('&', generatePrefix(prefix) + String.format(config.getString(location), args))));
+    }
 
 }
