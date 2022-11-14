@@ -4,7 +4,7 @@ main: com.github.krazypotatto.skyblock.Skyblock
 api-version: 1.19
 prefix: SB
 load: STARTUP
-depend: [ MGCore ]
+depend: [ MGCore, WorldGuard ]
 softdepend: [ Vault ]
 authors: [ KrazyPotatto ]
 description: Skyblock Plugin

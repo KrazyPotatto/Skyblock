@@ -22,7 +22,7 @@ public class CreateCommand implements ICommandExecutor {
 
     @Override
     public void executeCommand(@NotNull Player p, @NotNull String[] args, @NotNull Skyblock pl) {
-        if(pl.islandManager.getIsland(p).isPresent()
+        if(pl.islandManager.getIslandFromPlayer(p).isPresent()
         || SyncTaskManager.getInstance().getTasks().stream().anyMatch(t -> t instanceof IslandGenerationRunnable && ((IslandGenerationRunnable) t).p.getUniqueId() == p.getUniqueId())) {
             pl.messages.sendLocatedMessage(p, "commands.island.in-island", MessagesConfigHandler.PrefixType.ERROR);
         }else{

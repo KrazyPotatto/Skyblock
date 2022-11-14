@@ -8,6 +8,7 @@ commands:
   not-console: "Only a player can execute this command."
   not-found: "The command you entered was not found."
   no-permission: "You don't have the necessary permissions to execute this command."
+  player-not-found: "The player you are looking for was not found."
   island:
     no-island: "You are not part of an island. You can't use this command."
     in-island: "You either own or are a member of an island. You can't use this command."
@@ -16,6 +17,22 @@ commands:
       success: "Island created successfully!"
       error: "An error occurred."
     home: "You have been teleported to your island's spawn point"
+    invite:
+      already-in-island: "&cPlayer &e%s&c is already part of another island."
+      sent: "&aYou sent an invitation to join your island to player &e%s&a."
+      sent-revocation: "&aYou revoked the invitation to join your island to player &e%s&a."
+      received: "&aYou received an invitation to join &e%s&a's island."
+      revoked: "&cYour invitation to &e%s&c's island has been revoked."
+    join:
+      in-island: "You are already part of an island. You cannot use this command."
+      specify: "Please specify the island's owner you are trying to join."
+      not-found: "The player you are trying to join either has not played on the server or do not own an island."
+      not-invited: "You do not have a standing invitation to that island."
+      success: "&aYou successfully joined &e%s&a's island."
+    leave:
+      not-in-island: "You must be part of an island to use this command."
+      owner: "The owner of an island cannot quit is own island."
+      success: "You successfully left the island."
   balance:
     bal:
       show: "&aYour team's balance is &e%.2f&a$"

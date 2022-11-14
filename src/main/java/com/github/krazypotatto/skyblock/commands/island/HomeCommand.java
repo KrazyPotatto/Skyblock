@@ -23,7 +23,7 @@ public class HomeCommand implements ICommandExecutor {
 
     @Override
     public void executeCommand(@NotNull Player p, @NotNull String[] args, @NotNull Skyblock pl) {
-        Optional<Island> is = pl.islandManager.getIsland(p);
+        Optional<Island> is = pl.islandManager.getIslandFromPlayer(p);
         if(is.isPresent()){
             Island island = is.get();
             p.teleport(island.getSpawn());

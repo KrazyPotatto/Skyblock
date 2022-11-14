@@ -20,11 +20,15 @@ public class IslandManager {
         return islands.stream().filter(i -> i.getIslandID() == islandUUID).findFirst();
     }
 
+    public boolean isOwner(UUID playerUUID){
+        return islands.stream().anyMatch(i -> i.getOwner().equals(playerUUID));
+    }
+
     public Optional<Island> getIslandFromPlayer(UUID playerUUID){
         return islands.stream().filter(i -> i.getOwner().equals(playerUUID) || i.getMembers().contains(playerUUID)).findFirst();
     }
 
-    public Optional<Island> getIsland(OfflinePlayer p){
+    public Optional<Island> getIslandFromPlayer(OfflinePlayer p){
         return getIslandFromPlayer(p.getUniqueId());
     }
 

@@ -1,9 +1,7 @@
 package com.github.krazypotatto.skyblock.commands;
 
 import com.github.krazypotatto.skyblock.Skyblock;
-import com.github.krazypotatto.skyblock.commands.island.CreateCommand;
-import com.github.krazypotatto.skyblock.commands.island.HomeCommand;
-import com.github.krazypotatto.skyblock.commands.island.LeaveCommand;
+import com.github.krazypotatto.skyblock.commands.island.*;
 import com.github.krazypotatto.skyblock.utils.MessagesConfigHandler;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -23,6 +21,8 @@ public class IslandCommand implements CommandExecutor {
         commands.add(new CreateCommand());
         commands.add(new LeaveCommand());
         commands.add(new HomeCommand());
+        commands.add(new InviteCommand());
+        commands.add(new JoinCommand());
     }
 
     @Override

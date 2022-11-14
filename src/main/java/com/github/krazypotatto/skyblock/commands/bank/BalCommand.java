@@ -29,10 +29,10 @@ public class BalCommand implements ICommandExecutor {
         String playerName = "";
         if(args.length == 1){
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(args[0]);
-            island = pl.islandManager.getIsland(offlinePlayer);
+            island = pl.islandManager.getIslandFromPlayer(offlinePlayer);
             playerName = offlinePlayer.getName();
         }else {
-            island = pl.islandManager.getIsland(p);
+            island = pl.islandManager.getIslandFromPlayer(p);
         }
         if(island.isPresent()){
             Optional<BankAccount> account = pl.bank.getAccount(island.get().getIslandID());

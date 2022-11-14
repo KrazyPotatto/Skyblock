@@ -6,7 +6,6 @@ import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +66,7 @@ public class VaultEconomyConnector implements Economy {
 
     @Override
     public boolean hasAccount(OfflinePlayer player) {
-        Optional<Island> is = pl.islandManager.getIsland(player);
+        Optional<Island> is = pl.islandManager.getIslandFromPlayer(player);
         if(!is.isPresent()) return false;
         return pl.bank.getAccount(is.get().getIslandID()).isPresent();
     }
@@ -90,7 +89,7 @@ public class VaultEconomyConnector implements Economy {
     @Override
     public double getBalance(OfflinePlayer player) {
         if(!hasAccount(player)) return -1;
-        Optional<Island> is = pl.islandManager.getIsland(player);
+        Optional<Island> is = pl.islandManager.getIslandFromPlayer(player);
         return pl.bank.getAccount(is.get().getIslandID()).get().getBalance();
     }
 
