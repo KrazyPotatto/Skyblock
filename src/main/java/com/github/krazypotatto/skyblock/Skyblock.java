@@ -8,11 +8,17 @@ import com.github.krazypotatto.skyblock.utils.islands.IslandManager;
 import com.github.krazypotatto.skyblock.utils.schematics.SchematicReaderUtils;
 import com.github.krazypotatto.skyblock.utils.serializables.Bank;
 import com.github.krazypotatto.skyblock.utils.serializables.Island;
+import com.github.krazypotatto.skyblock.utils.serializables.parts.rewards.AbstractReward;
+import com.github.krazypotatto.skyblock.utils.serializables.parts.rewards.ItemReward;
 import com.github.krazypotatto.skyblock.worldgen.VoidChunkGenerator;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +28,18 @@ import java.util.Objects;
 
 public final class Skyblock extends JavaPlugin {
 
+    private static Gson gsonInstance;
+
+    public static Gson gsonGlobal(){
+        if(gsonInstance == null){
+            RuntimeTypeAdapterFactory<AbstractReward> rewardGsonAdapter =
+                    RuntimeTypeAdapterFactory.of(AbstractReward.class)
+                            .registerSubtype(ItemReward.class);
+            gsonInstance = new GsonBuilder().registerTypeAdapterFactory(rewardGsonAdapter).setPrettyPrinting().create();
+        }
+        return gsonInstance;
+    }
+
     public IslandManager islandManager;
     public MessagesConfigHandler messages;
     public SchematicReaderUtils schematic;
@@ -30,6 +48,7 @@ public final class Skyblock extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
         loadFiles();
         registerEconomy();
         Objects.requireNonNull(getCommand("is")).setExecutor(new IslandCommand(this));
@@ -48,7 +67,7 @@ public final class Skyblock extends JavaPlugin {
     }
 
     @Override
-    public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
+    public ChunkGenerator getDefaultWorldGenerator(@NotNull String worldName, String id){
         return new VoidChunkGenerator();
     }
 
@@ -82,7 +101,7 @@ public final class Skyblock extends JavaPlugin {
             getServer().getServicesManager().register(Economy.class, new VaultEconomyConnector(this), this, ServicePriority.Highest);
             getLogger().info("Vault connecter has been registered");
         }else {
-            getLogger().info("Vault was not detected. Not registering.");
+            getLogger().info("Vault was not detected. Not registering. Some plugins may not be interoperable with the currency system.");
         }
     }
 

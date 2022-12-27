@@ -10,7 +10,6 @@ import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.flags.StateFlag;
-import com.sk89q.worldguard.protection.flags.StringFlag;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.managers.storage.StorageException;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
@@ -64,6 +63,8 @@ public class IslandGenerationRunnable extends BukkitRunnable {
         region.setFlag(Flags.TNT, StateFlag.State.ALLOW);
         region.setFlag(Flags.DESTROY_VEHICLE, StateFlag.State.ALLOW);
         region.setFlag(Flags.PLACE_VEHICLE, StateFlag.State.ALLOW);
+        region.setFlag(Flags.MOB_SPAWNING, StateFlag.State.ALLOW);
+        region.setFlag(Flags.FALL_DAMAGE, StateFlag.State.ALLOW);
 
         RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
         RegionManager regions = container.get(BukkitAdapter.adapt(spawn.getWorld()));

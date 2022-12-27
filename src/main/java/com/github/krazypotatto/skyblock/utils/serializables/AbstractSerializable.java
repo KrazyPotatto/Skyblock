@@ -1,5 +1,6 @@
 package com.github.krazypotatto.skyblock.utils.serializables;
 
+import com.github.krazypotatto.skyblock.Skyblock;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -20,16 +21,14 @@ public abstract class AbstractSerializable<T extends AbstractSerializable<T>> {
 
     public void loadData() throws IOException {
         if(!file.exists()) return;
-        Gson gson = new Gson();
         Reader reader = Files.newBufferedReader(file.toPath());
-        applyValues(gson.fromJson(reader, type));
+        applyValues(Skyblock.gsonGlobal().fromJson(reader, type));
         reader.close();
     }
 
     public void saveData() throws IOException {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Writer write = Files.newBufferedWriter(file.toPath());
-        gson.toJson(this, write);
+        Skyblock.gsonGlobal().toJson(this, write);
         write.close();
     }
 

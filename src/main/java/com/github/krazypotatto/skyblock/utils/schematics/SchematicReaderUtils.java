@@ -2,7 +2,6 @@ package com.github.krazypotatto.skyblock.utils.schematics;
 
 import com.github.krazypotatto.skyblock.Skyblock;
 import com.google.common.reflect.TypeToken;
-import com.google.gson.Gson;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.TreeType;
@@ -18,12 +17,11 @@ public class SchematicReaderUtils {
     private List<SchematicPart> parts;
 
     public SchematicReaderUtils(String filename, Skyblock pl) {
-        Gson gson = new Gson();
         try {
             Reader reader = Files.newBufferedReader(Paths.get(pl.getDataFolder().getPath(), filename));
 
-            parts = gson.fromJson(reader, new TypeToken<List<SchematicPart>>() {
-            }.getType());
+
+            parts = Skyblock.gsonGlobal().fromJson(reader, new TypeToken<List<SchematicPart>>() {}.getType());
 
             reader.close();
         } catch (IOException ex){
