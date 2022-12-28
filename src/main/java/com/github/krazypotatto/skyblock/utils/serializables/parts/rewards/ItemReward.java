@@ -27,3 +27,17 @@ public class ItemReward extends AbstractReward{
         player.getInventory().addItem(item.toItemStack());
     }
 }
+/*
+ * Example of an ItemReward formatted in JSON
+ * {
+ *   "item": {
+ *     "material": "DIAMOND_SWORD",
+ *     "quantity": 1,
+ *     "displayName": "",
+ *     "lore": [],
+ *     "enchantments": {
+ *       "Enchantment[minecraft:sharpness, DAMAGE_ALL]": 3
+ *     }
+ *   }
+ * }
+ */

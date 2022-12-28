@@ -10,6 +10,7 @@ import com.github.krazypotatto.skyblock.utils.serializables.Bank;
 import com.github.krazypotatto.skyblock.utils.serializables.Island;
 import com.github.krazypotatto.skyblock.utils.serializables.parts.rewards.AbstractReward;
 import com.github.krazypotatto.skyblock.utils.serializables.parts.rewards.ItemReward;
+import com.github.krazypotatto.skyblock.utils.serializables.parts.rewards.MonetaryReward;
 import com.github.krazypotatto.skyblock.worldgen.VoidChunkGenerator;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -34,7 +35,8 @@ public final class Skyblock extends JavaPlugin {
         if(gsonInstance == null){
             RuntimeTypeAdapterFactory<AbstractReward> rewardGsonAdapter =
                     RuntimeTypeAdapterFactory.of(AbstractReward.class)
-                            .registerSubtype(ItemReward.class);
+                            .registerSubtype(ItemReward.class)
+                            .registerSubtype(MonetaryReward.class);
             gsonInstance = new GsonBuilder().registerTypeAdapterFactory(rewardGsonAdapter).setPrettyPrinting().create();
         }
         return gsonInstance;

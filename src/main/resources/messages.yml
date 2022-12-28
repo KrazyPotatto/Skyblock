@@ -4,6 +4,12 @@ prefix: "&6Skyblock &7>> &e"
 error-prefix: "&4Error &7> &c"
 success-prefix: "&2Success &7> &a"
 
+rewards:
+  errors:
+    monetary:
+      not-in-island: "&cYou need to be part of an island to claim a monetary reward"
+      unknown-error: "&cAn error occurred, please try again in a bit. If the error persist please contact an administrator."
+
 commands:
   not-console: "Only a player can execute this command."
   not-found: "The command you entered was not found."
