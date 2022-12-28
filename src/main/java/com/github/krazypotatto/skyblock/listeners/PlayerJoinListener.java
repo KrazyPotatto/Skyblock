@@ -1,4 +1,4 @@
-package com.github.krazypotatto.skyblock.listenets;
+package com.github.krazypotatto.skyblock.listeners;
 
 import com.github.krazypotatto.skyblock.Skyblock;
 import org.bukkit.event.EventHandler;
