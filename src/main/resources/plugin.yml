@@ -9,6 +9,11 @@ softdepend: [ Vault ]
 authors: [ KrazyPotatto ]
 description: Skyblock Plugin
 commands:
+  quest:
+    aliases:
+      - q
+      - quests
+    description: Main questing command
   is:
     description: Main Island Command
   bal:
