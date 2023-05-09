@@ -65,7 +65,7 @@
         <repository>
             <id>private-hosted</id>
             <name>My Private Maven Repository</name>
-            <url>https://repo.kpotatto.tk/repository/releases</url>
+            <url>https://repo.kpotatto.net/repository/releases</url>
         </repository>
         <repository>
             <id>jitpack.io</id>
